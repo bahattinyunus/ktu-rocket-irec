@@ -1,74 +1,44 @@
-# 🚀 PROXIMA GÖREVİ | Spaceport America Cup Reposu
+# 🚀 PROXIMA GÖREVİ | Spaceport America Cup Bilgi Bankası
 
-![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![OpenRocket](https://img.shields.io/badge/OpenRocket-Sim-blueviolet?style=for-the-badge) ![SolidWorks](https://img.shields.io/badge/SolidWorks-CAD-red?style=for-the-badge) ![Altium](https://img.shields.io/badge/Altium-PCB-yellow?style=for-the-badge)
+![Banner](https://img.shields.io/badge/Görev-PROXIMA-orange?style=for-the-badge) ![Yarışma](https://img.shields.io/badge/Yarışma-Spaceport_America_Cup-blue?style=for-the-badge) ![Konum](https://img.shields.io/badge/Fırlatma_Sahası-New_Mexico_ABD-red?style=for-the-badge) ![Durum](https://img.shields.io/badge/Durum-Bilgi_Bankası_Aktif-green?style=for-the-badge)
 
-![Banner](https://img.shields.io/badge/Görev-PROXIMA-orange?style=for-the-badge) ![Yarışma](https://img.shields.io/badge/Yarışma-Spaceport_America_Cup-blue?style=for-the-badge) ![Konum](https://img.shields.io/badge/Fırlatma_Sahası-New_Mexico_ABD-red?style=for-the-badge) ![Durum](https://img.shields.io/badge/Durum-Geliştirme_Aşamasında-green?style=for-the-badge)
+> [!IMPORTANT]
+> **BU REPO SADECE BİLGİ VE DÖKÜMANTASYON İÇERİR.**
+> Uçuş yazılımları, gömülü kodlar ve simülasyon dosyaları ayrı bir repoda tutulmaktadır. Burası takımın "Beyni"dir.
 
-## 🌌 Görev Tanımı (Mission Statement)
-**KTU Gökçen Roket Takımı**, dünyanın en büyük üniversiteler arası roket mühendisliği konferansı ve yarışması olan **Spaceport America Cup**'ta yarışmak üzere yeni nesil sondaj roketleri tasarlamaktadır.
-
-Misyonumuz, bilimsel bir faydalı yükü hedef irtifaya taşıyabilen, itki ve aviyonik alanlarında **SRAD (Öğrenci Araştırması ve Geliştirmesi)** mükemmelliğini sergileyen **yüksek performanslı bir fırlatma aracı** tasarlamak, üretmek ve fırlatmaktır.
+## 🌌 Görev Tanımı
+**KTU Gökçen Roket Takımı**, Spaceport America Cup için geliştirdiği roketin tüm teknik birikimini, tasarım kararlarını ve mühendislik hesaplarını burada dökümante eder.
 
 ---
 
-## 🏆 Kutsal Kase: IREC Teknik Rapor Referansları
+## 📚 Bilgi Portalı (Knowledge Portal)
+
+### 📘 [Yarışma Rehberi (Competition Guide)](docs/00_Competition_Guide/README.md)
+*   **Anayasa:** Kurallar, Puanlama, Cezalar.
+*   **Kategoriler:** 10k/30k, COTS/SRAD farkları.
+
+### �️ Alt Sistem Mühendisliği (Subsystem Engineering)
+Roketin kalbi burada atar. Detaylı teknik kılavuzlar:
+
+| Sistem | İçerik | Link |
+| :--- | :--- | :--- |
+| **🚀 İtki (Propulsion)** | Motor seçimi, Hibrit motor teorisi, Üretim checklistleri. | [▶️ İncele](docs/04_Subsystems_&_Payload/01_Propulsion/README.md) |
+| **📟 Aviyonik (Avionics)** | PCB tasarım kuralları, sensör (BOM) listesi, RF link bütçesi. | [▶️ İncele](docs/04_Subsystems_&_Payload/02_Avionics/README.md) |
+| **🏗️ Yapısal (Structures)** | Karbon fiber vs Fiberglass, Fin flutter analizi. | [▶️ İncele](docs/04_Subsystems_&_Payload/03_Aerostructures/README.md) |
+| **🪂 Kurtarma (Recovery)** | Paraşüt boyutlandırma, Barut (Black powder) hesapları. | [▶️ İncele](docs/04_Subsystems_&_Payload/04_Recovery/README.md) |
+
+### 📂 Proje Yönetimi & Teslimatlar
+*   **[PDR Şablonu](docs/01_Milestones_&_Updates/PDR_Template.md):** Ön Tasarım Raporu taslağı.
+*   **[Teknik Rapor Şablonu](docs/02_Technical_Report/Technical_Report_Template.md):** "Kutsal Kase" rapor taslağı.
+*   **Geçmiş Raporlar:** [Örnek Rapor Arşivi](docs/reference_reports/README.md)
+
+---
+
+## 🏆 Kutsal Kase: Referans Raporlar
 *"İyi sanatçılar kopyalar, büyük sanatçılar çalar." - Pablo Picasso*
 
-Aşağıdaki raporlar, Spaceport America Cup standartlarını yakalamamız için **incelenmesi zorunlu** kaynaklardır.
-
-### 🚀 30,000 ft (İleri Kategori)
-> *Karmaşık aerodinamik, süpersonik uçuş profilleri ve çok kademeli mimariler.*
-*   **[McGill Rocket Team - Stella II (2018)](https://www.mcgillrocketteam.com/)** - *Kompozit Gövde & Aviyonik*
-*   **[Waterloo Rocketry - Kraken of the Sky (2022)](https://waterloorocketry.com/)** - *Hibrit Motor & SRAD Sistemler*
-*   **[Waterloo Rocketry - Shark of the Sky (2019)](https://waterloorocketry.com/)** - *Yüksek İrtifa Tasarımı*
-
-### 🛸 10,000 ft (Orta Kategori)
-> *Hassas iniş, COTS (Hazır) motor ustalığı ve faydalı yük entegrasyonu.*
-*   **[McGill Rocket Team - Project Blanche (2018)](https://www.mcgillrocketteam.com/)** - *COTS Entegrasyon & Kurtarma*
-*   **[Texas A&M SRT - Telemachus (2024)](https://tamusrt.org/)** - *Sentetik Açıklıklı Radar (SAR) Faydalı Yükü*
-*   **[Texas A&M SRT - Daedalus (2017)](https://tamusrt.org/)** - *10k Hibrit Motor Başarısı*
-*   **[Waterloo Rocketry - Vidar III (2017)](https://waterloorocketry.com/)** - *SRAD Hibrit Başlangıcı*
-
-### 🧪 Deneysel & SRAD Teknolojiler
-> *Özel itki sistemleri ve yenilikçi malzemelerle sınırları zorlamak.*
-*   **[Waterloo Rocketry - Unexploded Ordnance (2018)](https://waterloorocketry.com/)** - *Kismet Hibrit Motor Serisi*
-*   **[Clemson University - IREC 2024 Raporu](https://cecas.clemson.edu/rocket-engineering/)** - *Süreç Yönetimi ve Mühendislik Disiplini*
-*   **[Clemson University Arşivi (2022-2023)](https://cecas.clemson.edu/rocket-engineering/)**
-
----
-
-## 📂 Repo Yapısı (Repository Structure)
-
-```bash
-📦 ktu-rocket-irec
- ┣ 📂 .github
- ┃ ┣ 📂 ISSUE_TEMPLATE (Hata & Özellik Bildirimleri)
- ┃ ┗ 📜 pull_request_template.md
- ┣ 📂 analysis (Simülasyonlar & Analizler)
- ┃ ┣ 📜 example_sim.py
- ┃ ┗ 📜 requirements.txt
- ┣ 📂 docs
- ┃ ┣ 📂 00_Competition_Guide (Yarışma Kuralları & Rehber)
- ┃ ┣ 📂 01_Milestones_&_Updates (PDR, CDR Sunumları)
- ┃ ┣ 📂 02_Technical_Report (Teknik Rapor Taslakları)
- ┃ ┣ 📂 03_Safety_&_SRAD (Güvenlik & Risk Analizleri)
- ┃ ┣ 📂 04_Subsystems_&_Payload (Alt Sistem Tasarımları)
- ┃ ┗ 📂 reference_reports (Örnek Rapor Arşivi)
- ┗ 📜 README.md
-```
-Irec teslimat takvimine tam uyumlu klasör yapısı.
-
----
-
-## 🛠️ Teknoloji Yığını & Analiz Araçları
-
-> [!TIP]
-> **Önce Simülasyon:** Simüle edemediğimiz hiçbir şeyi uçurmayız.
-
-*   **Yörünge:** [OpenRocket](https://openrocket.info/), [RocketPy](https://github.com/RocketPy-Team/RocketPy)
-*   **CAD/CFD:** SolidWorks, Ansys Fluent
-*   **PCB Tasarımı:** Altium Designer / KiCad
-*   **Yazılım:** Python, C++ (Gömülü)
+*   **30k Advanced:** [McGill Stella II](https://www.mcgillrocketteam.com/), [Waterloo Kraken](https://waterloorocketry.com/)
+*   **10k COTS:** [Texas A&M Telemachus](https://tamusrt.org/)
 
 ---
 
@@ -76,28 +46,22 @@ Irec teslimat takvimine tam uyumlu klasör yapısı.
 
 ```mermaid
 gantt
-    title IREC 2026 Kampanya Zaman Çizelges
+    title IREC 2026 Süreci
     dateFormat  YYYY-MM-DD
     axisFormat  %b %Y
 
     section Planlama
-    Konsept Belirleme       :active,    des1, 2025-10-01, 30d
-    PDR (Ön Tasarım)        :           des2, after des1, 45d
+    Konsept & Ar-Ge         :active,    des1, 2025-10-01, 30d
+    PDR Teslimi             :           des2, after des1, 45d
 
-    section Geliştirme
-    Prototip & SRAD Test    :           dev1, after des2, 90d
-    CDR (Kritik Tasarım)    :           dev2, after dev1, 30d
-
-    section Test
-    Tam Entegrasyon Testi   :           tst1, after dev2, 45d
-    Uçuşa Hazırlık Gözden Geçirme :     tst2, after tst1, 15d
+    section Üretim & Test
+    Alt Sistem Üretimi      :           dev1, after des2, 90d
+    CDR Teslimi             :           dev2, after dev1, 30d
+    Yer Testleri & FRR      :           tst1, after dev2, 60d
 
     section Fırlatma
     Spaceport America Cup   :crit,      launch, 2026-06-15, 7d
 ```
 
-## 🤝 Katkıda Bulunma
-Değişiklik önerme, hata bildirme ve Pull Request gönderme yönergeleri için `CONTRIBUTING.md` dosyasına bakın. Katı bir **"Özellik Başına Dal (Branch per Feature)"** iş akışı izliyoruz.
-
 ---
-*KTU Gökçen Roket Takımı tarafından ❤️ ile oluşturuldu*
+*KTU Gökçen Roket Takımı Bilgi Bankası*
