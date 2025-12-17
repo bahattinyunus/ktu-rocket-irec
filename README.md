@@ -24,14 +24,15 @@
 
 ## 📚 İçindekiler (Table of Contents)
 1.  [Görev Tanımı](#-görev-tanımı)
-2.  [Gelecek Vizyonu (Roadmap)](#-gelecek-vizyonu-roadmap)
-3.  [Sistem Mühendisliği Yaklaşımı (V-Model)](#-sistem-mühendisliği-v-modeli-yaklaşımı)
-3.  [Uçuş Dinamiği ve Monte Carlo Analizleri](#-uçuş-dinamiği-ve-monte-carlo-analizleri)
-4.  [Spaceport America Cup: Derinlemesine Bakış](#-spaceport-america-cup-derinlemesine-bakış)
-5.  [Yazılım Mimarisi (Safety Critical)](#-yazılım-mimarisi-safety-critical)
-6.  [Launch Day Ops: Saat Saat Operasyon](#-launch-day-ops-saat-saat-operasyon)
-7.  [Sahada Yaşam Rehberi: Isı, Toz ve Yılanlar](#-sahada-yaşam-rehberi-ısı-toz-ve-yılanlar)
-8.  [Alt Sistemler ve Bilgi Portalı](#-alt-sistemler-ve-bilgi-portalı)
+2.  [Organizasyon Hakkında: ESRA & IREC](#-organizasyon-hakkında-esra--irec-nedir)
+3.  [Gelecek Vizyonu (Roadmap)](#-gelecek-vizyonu-roadmap)
+4.  [Sistem Mühendisliği Yaklaşımı (V-Model)](#-sistem-mühendisliği-v-modeli-yaklaşımı)
+5.  [Uçuş Dinamiği ve Monte Carlo Analizleri](#-uçuş-dinamiği-ve-monte-carlo-analizleri)
+6.  [Spaceport America Cup: Derinlemesine Bakış](#-spaceport-america-cup-derinlemesine-bakış)
+7.  [Yazılım Mimarisi (Safety Critical)](#-yazılım-mimarisi-safety-critical)
+8.  [Launch Day Ops: Saat Saat Operasyon](#-launch-day-ops-saat-saat-operasyon)
+9.  [Sahada Yaşam Rehberi: Isı, Toz ve Yılanlar](#-sahada-yaşam-rehberi-ısı-toz-ve-yılanlar)
+10. [Alt Sistemler ve Bilgi Portalı](#-alt-sistemler-ve-bilgi-portalı)
 
 ---
 
@@ -57,11 +58,28 @@ timeline
 ---
 
 ## 🌌 Görev Tanımı
+> *"We choose to go to the moon not because it is easy, but because it is hard."* - J.F. Kennedy
+
 **KTU Gökçen Roket Takımı**, Spaceport America Cup için **sistem güvenilirliği (reliability)** ve **uçuş kesinliği (precision)** odaklı bir mühendislik kültürü benimser. "Deneme-Yanılma" değil, "Analiz Et-Simüle Et-Doğrula" (Analyze-Simulate-Verify) prensibiyle çalışırız.
 
 ---
 
-## �️ Gelecek Vizyonu (Roadmap)
+## 🏛️ Organizasyon Hakkında: ESRA & IREC Nedir?
+Bu proje, sıradan bir roket fırlatma etkinliği değil, küresel bir mühendislik meydan okumasıdır.
+
+### 🇺🇸 ESRA (Experimental Sounding Rocket Association)
+2003 yılında kurulan **ESRA**, gelecek nesil havacılık ve uzay mühendislerini yetiştirmeyi amaçlayan, ABD merkezli, kar amacı gütmeyen (Non-profit) bir kuruluştur. Boeing, Blue Origin ve Virgin Galactic gibi devlerin desteğiyle, akademik teori ile saha operasyonları arasındaki boşluğu doldurur.
+
+### 🏆 IREC (Spaceport America Cup)
+Dünyanın en büyük üniversiteler arası roket mühendisliği yarışmasıdır.
+*   **Konum:** Spaceport America, New Mexico (Dünyanın ilk ticari uzay limanı).
+*   **Ölçek:** 6 kıtadan, 24 ülkeden 150'den fazla üniversite takımı.
+*   **Amaç:** 10,000 ft veya 30,000 ft irtifaya hassas bir şekilde ulaşabilen, bilimsel faydalı yük taşıyan ve tamamen öğrenci tasarımı (SRAD) roket sistemleri geliştirmek.
+*   **Prestij:** Bu yarışma, "Roketçiliğin Olimpiyatları" olarak kabul edilir.
+
+---
+
+## 🗺️ Gelecek Vizyonu (Roadmap)
 Bu takım nereye gidiyor? 2025 ve ötesi için planlarımız:
 *   [Yol Haritasını Görüntüle (ROADMAP.md)](ROADMAP.md)
 *   **Q1 2025:** PDR Tamamlanması & Avionics Bench Testleri.
@@ -70,7 +88,7 @@ Bu takım nereye gidiyor? 2025 ve ötesi için planlarımız:
 
 ---
 
-## �📐 Sistem Mühendisliği: "V-Modeli" Yaklaşımı
+## 📐 Sistem Mühendisliği: "V-Modeli" Yaklaşımı
 Gökçen Takımı, NASA standartlarında "V-Model" yaşam döngüsünü uygular.
 
 ```mermaid
@@ -95,6 +113,9 @@ Roketimiz düz gitmez. Rüzgar, itki sapmaları ve montaj hataları kaotiktir.
 ### 1. 6-DOF Hareket Denklemleri (Equations of Motion)
 RocketPy veya OpenRocket kullanırken, arka planda şu diferansiyel denklemler çözülür:
 
+<details>
+<summary>📐 Denklemleri Görüntüle (Matematiksel Derinlik)</summary>
+
 **Öteleme (Translation - Newton II):**
 $$ \Sigma \vec{F} = m \frac{d\vec{v}}{dt} = \vec{F}_{thrust} + \vec{F}_{drag} + \vec{F}_{lift} + \vec{F}_{gravity} $$
 
@@ -102,6 +123,8 @@ $$ \Sigma \vec{F} = m \frac{d\vec{v}}{dt} = \vec{F}_{thrust} + \vec{F}_{drag} + 
 $$ \Sigma \vec{M} = I \cdot \dot{\vec{\omega}} + \vec{\omega} \times (I \cdot \vec{\omega}) $$
 *   $I$: Eylemsizlik momenti tensörü. (Roket yakıt yaktıkça sürekli değişir!)
 *   $\vec{\omega}$: Açısal hız vektörü.
+
+</details>
 
 ### 2. Monte Carlo Dispersiyon Analizi
 Tek bir simülasyon yetersizdir. Olasılıksal (Stokastik) analiz için **1000+ Uçuş** simüle edilir.
@@ -113,7 +136,7 @@ Tek bir simülasyon yetersizdir. Olasılıksal (Stokastik) analiz için **1000+ 
 
 ---
 
-## � Yazılım Mimarisi (Safety Critical)
+## 💻 Yazılım Mimarisi (Safety Critical)
 [📝 Detaylı Yazılım Rehberi için Tıklayın](docs/04_Subsystems_&_Payload/02_Avionics/README.md)
 
 Yazılımımız "Patlamayı Önlemek" üzerine kuruludur.
@@ -125,7 +148,7 @@ Yazılımımız "Patlamayı Önlemek" üzerine kuruludur.
 
 ---
 
-## �️ Spaceport America Cup: Derinlemesine Bakış
+## 🏜️ Spaceport America Cup: Derinlemesine Bakış
 *   **10k/30k Kategorileri:** COTS (Hazır Motor) ve SRAD (Kendi Motorumuz) ayrımı.
 *   **Puanlama:** %50 Uçuş (İrtifa doğruluğu), %50 Mühendislik (Rapor kalitesi).
 *   **Cezalar:**
@@ -134,7 +157,7 @@ Yazılımımız "Patlamayı Önlemek" üzerine kuruludur.
 
 ---
 
-## ️ Alt Sistem Mühendisliği (Bilgi Portalı)
+## 🛠️ Alt Sistem Mühendisliği (Bilgi Portalı)
 Tüm detaylar ilgili klasörlerde:
 
 | Sistem | İçerik | Link |
