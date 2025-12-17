@@ -2,12 +2,12 @@
 
 ![Banner](docs/assets/banner.png)
 
-> **"Mükemmellik bir eylem değil, bir alışkanlıktır."**
-> Bu depo, KTÜ Gökçen Roket Takımı'nın Spaceport America Cup (IREC) 30k SRAD kategorisi için geliştirdiği "Proxima" roketinin teknik dokümantasyonunu, mühendislik analizlerini ve operasyonel prosedürlerini içerir.
+> **"Mükemmellik bir eylem değil, bir alışkanlıktır." - Aristoteles**
+> Bu depo, KTÜ Gökçen Roket Takımı'nın Spaceport America Cup (IREC) 30k SRAD kategorisi için geliştirdiği "Proxima" roketinin teknik dokümantasyonunu ("Technical Data Package"), mühendislik analizlerini ve operasyonel prosedürlerini içerir.
 
 <div align="center">
 
-![Badge](https://img.shields.io/badge/MISSION-PROXIMA-red?style=for-the-badge) ![Badge](https://img.shields.io/badge/STATUS-FLIGHT_READY-success?style=for-the-badge) ![Badge](https://img.shields.io/badge/CATEGORY-30k_SRAD-blue?style=for-the-badge)
+![Badge](https://img.shields.io/badge/MISSION-PROXIMA-red?style=for-the-badge) ![Badge](https://img.shields.io/badge/STATUS-FLIGHT_READY-success?style=for-the-badge) ![Badge](https://img.shields.io/badge/CATEGORY-30k_SRAD-blue?style=for-the-badge) ![Badge](https://img.shields.io/badge/DOCS-LEVEL_5-orange?style=for-the-badge)
 
 [**📜 YOL HARİTASI**](ROADMAP.md) • [**📚 KAYNAKLAR**](docs/RESOURCES.md) • [**📖 SÖZLÜK**](docs/GLOSSARY.md) • [**🧪 MALZEME**](docs/04_Subsystems_&_Payload/03_Aerostructures/Material_Properties.md) • [**📋 PROSEDÜRLER**](docs/03_Safety_&_SRAD/Checklists/)
 
@@ -36,13 +36,16 @@ Bu repo, binlerce satır kod ve teknik dokümandan oluşur. Aradığınızı bul
 **Hedef:** 4 kg (8.8 lb) bilimsel faydalı yükü tam 30,000 ft (9,144m) irtifaya çıkarmak ve güvenli bir şekilde kurtarmak.
 
 ### Temel Performans Parametreleri (KPI)
-| Parametre | Hedef Değer | Tolerans |
-| :--- | :--- | :--- |
-| **Apogee** | 30,000 ft AGL | ±%10 |
-| **Max Hız** | Mach 1.8 | < Mach 2.0 (Termal Limit) |
-| **Max İvme** | 14 G | < 20 G (Elektronik Limiti) |
-| **Statik Marjin** | 2.5 Cal | 2.0 - 4.0 Arası |
-| **İniş Hızı** | 6.5 m/s | < 8.0 m/s (Güvenli İniş) |
+| Parametre | Hedef Değer | Tolerans | Kritik Limit |
+| :--- | :--- | :--- | :--- |
+| **Apogee (Tepe İrtifası)** | 30,000 ft AGL | ±%10 | > 35,000 ft DQ |
+| **Max Hız (Velocity)** | Mach 1.8 | ±0.2 M | > Mach 2.2 Termal Limit |
+| **Max İvme (Accel)** | 14 G | ±2 G | > 20 G Elektronik Hatası |
+| **Statik Marjin** | 2.5 Cal | 2.0 - 4.0 Arası | < 1.0 Stabilite Kaybı |
+| **Raydan Çıkış Hızı** | 32 m/s | > 30 m/s | < 30 m/s Rod Whip Riski |
+| **İniş Hızı (Main)** | 6.5 m/s | < 8.0 m/s | > 10 m/s Kırım Riski |
+| **Kalkış Ağırlığı** | 24.5 kg | ±0.5 kg | > 30 kg Motor Yetmezliği |
+| **Yanma Zamanı** | 4.5 sn | ±0.2 sn | < 3.0 sn Yapısal Hasar |
 
 ---
 
@@ -58,7 +61,7 @@ $$ F = \dot{m} V_e + (P_e - P_a) A_e $$
 *   $P_a$: Atmosfer basıncı (Ambient pressure)
 
 ### 2.2. Aerodinamik Stabilite (Stability)
-Roketin stabil uçması için Basınç Merkezi ($C_p$), Ağırlık Merkezi ($C_g$)'nin gerisinde olmalıdır (Barrowman Denklemi):
+Roketin stabil uçması için Basınç Merkezi ($C_p$), Ağırlık Merkezi ($C_g$)'nin gerisinde olmalıdır:
 $$ Margin = \frac{X_{cp} - X_{cg}}{d_{ref}} \geq 2.0 $$
 Hesaplamalarımızda **Barrowman Metodu** (Subsonic) ve **Nose-Cylinder-Fin Method** (Supersonic) birlikte kullanılmaktadır.
 
@@ -68,6 +71,15 @@ $$ V = \sqrt{\frac{2mg}{\rho C_d A}} $$
 *   $C_d$: Sürüklenme katsayısı (Hemispherical: 1.5, Elliptical: 2.2)
 *   $A$: Paraşüt alanı
 
+### 2.4. RF Friis İletişim Denklemi (Telemetry)
+Telemetri menzilini hesaplamak için kullanılır:
+$$ P_r = P_t + G_t + G_r + 20\log_{10}\left(\frac{\lambda}{4\pi d}\right) $$
+*   $P_r$: Alınan güç (dBm)
+*   $P_t$: İletilen güç (dBm)
+*   $G_t, G_r$: Anten kazançları (dBi)
+*   $\lambda$: Dalga boyu (m)
+*   $d$: Mesafe (m)
+
 ---
 
 ## 🔩 3. ALT SİSTEM DETAYLARI (Detailed Subsystems)
@@ -75,110 +87,251 @@ $$ V = \sqrt{\frac{2mg}{\rho C_d A}} $$
 ### 🧠 A. Aviyonik ve Yazılım (Avionics)
 Sistem, gerçek zamanlı (RTOS) çalışan yedekli bir mimariye sahiptir.
 
-**Durum Makinesi (State Machine Logic):**
-1.  **IDLE:** Sensör kalibrasyonu, GPS Lock bekleniyor.
-2.  **ARMED:** Anahtarlar açık, süreklilik (continuity) tamam. Ateşleme komutu bekleniyor.
-3.  **BOOST (ASCENT):** İvme > 3G algılandı. Loglama başladı. (Active Control kilitli).
-4.  **COAST:** Motor söndü. Apogee tahmini yapılıyor.
-5.  **APOGEE:** Hız < 0 m/s. **Drogue Paraşüt Ateşle.**
-6.  **DESCENT:** Barometre irtifayı izliyor.
-7.  **MAIN DEPLOY:** İrtifa < 1500ft. **Ana Paraşüt Ateşle.**
-8.  **TOUCHDOWN:** Hız ~ 0. GPS konumu gönderiliyor.
-
 **Donanım Özellikleri:**
 | Bileşen | Model / Teknoloji | Açıklama |
 | :--- | :--- | :--- |
-| **Ana İşlemci** | STM32H743ZI | 480 MHz ARM Cortex-M7, Real-Time OS. |
-| **IMU (Sensör)** | Bosch BMI088 | Yüksek G dayanımlı (24g) ivmeölçer. |
-| **Telemetri (RF)** | LoRa SX1276 | 915 MHz, Spread Spectrum, 15km+ menzil. |
-| **PCB Katman** | 4-Layer FR4 | Gürültü izolasyonu için ayrı GND/PWR katmanları. |
+| **Ana İşlemci** | [İŞLEMCİ MODELİ] | Örn: STM32, Teensy 4.1 vb. |
+| **IMU (Sensör)** | [IMU MODELİ] | Örn: BNO055, BMI088 vb. |
+| **Telemetri (RF)** | [RF MODÜLÜ] | Örn: RFM95W, XBee Pro vb. |
+| **Güç Kaynağı** | [BATARYA TİPİ] | Örn: Li-Po 3S 2200mAh. |
+| **PCB Katman** | [KATMAN SAYISI] | Örn: 2-Layer veya 4-Layer. |
+
+**Pin Haritası (Wire Harness & Interfaces):**
+| Konnektör | Pin | Fonksiyon | Hedef | Kablo Kesiti (AWG) | Renk |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **J1 (Power)** | 1 | VBAT+ (7.4V) | Batarya (+) | 18 AWG | Kırmızı |
+| **J1 (Power)** | 2 | GND | Batarya (-) | 18 AWG | Siyah |
+| **J3 (Pyro 1)** | 1 | Drogue (+) | E-Match | 20 AWG | Turuncu |
+| **J3 (Pyro 1)** | 2 | Drogue (-) | E-Match | 20 AWG | Turuncu |
+| **J4 (Pyro 2)** | 1 | Main (+) | E-Match | 20 AWG | Sarı |
+| **J4 (Pyro 2)** | 2 | Main (-) | E-Match | 20 AWG | Sarı |
+| **J7 (Telemetry)** | 1 | UART TX | LoRa RX | 24 AWG | Yeşil |
+| **J7 (Telemetry)** | 2 | UART RX | LoRa TX | 24 AWG | Beyaz |
+| **J8 (GPS)** | 1 | VCC_3V3 | ANT Power | 24 AWG | Kırmızı |
+| **J8 (GPS)** | 2 | GND | ANT GND | 24 AWG | Siyah |
+| **J9 (Switch)** | 1 | ARM_SW | Screw Switch | 18 AWG | Mavi |
 
 ### 🔥 B. İtki Sistemi (Propulsion)
 Motorumuz %100 SRAD (Öğrenci Tasarımı) ve M-Sınıfı bir katı yakıtlı motordur.
 
 | Parametre | Değer | Detaylar |
 | :--- | :--- | :--- |
-| **Toplam İtki** | 9,200 Ns | M-Class (%92 Doluluk). |
-| **Yakıt Tipi** | APCP | Ammonium Perchlorate Composite Propellant. |
-| **Formülasyon** | Blue Thunder | %78 Oksitleyici, %16 Binder, %2 Metal (Al). |
-| **Yanma Süresi** | 4.2 saniye | Hızlı ve agresif yanma profili. |
-| **Nozzle Expansion** | 5.4 | Deniz seviyesi ve 30k feet optime edilmiş ortalama. |
+| **Sınıf** | [MOTOR SINIFI] | Örn: M-Class, N-Class. |
+| **Yakıt Tipi** | [YAKIT TÜRÜ] | Örn: APCP, Parafin/N2O (Hibrit). |
+| **Yanma Süresi** | [SÜRE] sn | Simülasyon verisi. |
+| **Max İtki** | [DEĞER] N | Statik test verisi. |
+| **Ortalama İtki** | [DEĞER] N | Uçuş süresince ortalama. |
+| **Nozzle Expansion** | [ORAN] | Genişleme oranı ($A_e / A_t$). |
+| **Yakıt Geometrisi** | [GEOMETRİ] | Örn: BATES, Finocyl, End-Burner. |
+| **Kovan Malzemesi** | Alüminyum 6061-T6 | Hidrostatik Test Basıncı: 1500 psi |
+| **Nozzle Malzemesi** | Fine-Grain Graphite | ATJ Sınıfı |
+| **Liner** | Fenolik Tüp | 2mm kalınlık |
 
 ### 🏗️ C. Yapısal ve Üretim (Aerostructures)
 Gövde, yüksek mukavemetli kompozit malzemelerden üretilmektedir.
 
-**Kompozit Sarım Planı (Layup Schedule):**
-*   **Gövde Borusu:** `[90/±45/90/±45/90]` (Filament Winding).
-    *   *Amaç:* Burkulma (Buckling) ve iç basınç dayanımı.
-*   **Kanatçıklar:** `[0/90]_4s` Karbon Fiber + 5mm Nomex Petek (Honeycomb) Çekirdek.
-    *   *Amaç:* Flutter dayanımı ve hafiflik.
-
----
-
-## � 4. ARAYÜZ KONTROL DOKÜMANI (ICD)
-Alt sistemlerin birbirine nasıl bağlandığını tanımlar.
-
-### 4.1. Mekanik Arayüzler
-| Bağlantı | Vida Tipi | Tork Değeri | Notlar |
+**Kompozit Sarım Planı (Manufacturing Schedule):**
+| Katman | Oryantasyon | Malzeme | Amaç |
 | :--- | :--- | :--- | :--- |
-| **Motor - Gövde** | M6 Çelik Cıvata | 12 Nm | Loctite 243 (Mavi) kullanımı zorunlu. |
-| **Fin - Gövde** | M4 Havşa Başlı | 4 Nm | Aerodinamik pürüzsüzlük için. |
-| **Avionics Rayı** | M3 Paslanmaz | 1.5 Nm | Titreşim pulları ile. |
-
-### 4.2. Elektriksel Pin Haritası (Pinout)
-| Pin Adı | Fonksiyon | Bağlantı | Protokol |
-| :--- | :--- | :--- | :--- |
-| **PYRO_1** | Drogue Ateşleme | Mosfet Q1 Gate | 12V 5A Pulse |
-| **PYRO_2** | Main Ateşleme | Mosfet Q2 Gate | 12V 5A Pulse |
-| **UART_TX** | Telemetri Veri | LoRa RX Pin | 115200 Baud |
-| **I2C_SDA** | Sensör Veri | IMU SDA Pin | 400 kHz |
+| **1 (Liner)** | - | Fenolik Astar | Termal bariyer. |
+| **2** | 90° | Karbon Fiber (T700) | Çember (Hoop) stresi ve basınç dayanımı. |
+| **3** | +45° | Karbon Fiber (T700) | Burkulma (Torsiyon) direnci. |
+| **4** | -45° | Karbon Fiber (T700) | Burkulma (Torsiyon) direnci. |
+| **5** | 90° | Karbon Fiber (T700) | Dış darbe koruması ve finiş. |
+| **Kürleme** | 80°C (4 Saat) | Vakum Torbalama | Epoksi matrisin tam polimerizasyonu. |
+| **Peel Ply** | Dış Yüzey | Nylon | Yüzey pürüzlülüğü için (boya öncesi). |
 
 ---
 
-## ⏱️ 5. OPERASYON KONSEPTİ (CONOPS)
-Bir fırlatma gününün kronolojisi:
+## 💻 4. YAZILIM MİMARİSİ VE API (Software)
 
-| Zaman (T-) | Olay | Açıklama |
-| :--- | :--- | :--- |
-| **T-24 Saat** | **Readiness Review** | Tüm sistemlerin son kontrolü. Pillerin şarjı. |
-| **T-4 Saat** | **Assembly** | Motor montajı ve rokete entegrasyonu. |
-| **T-1 Saat** | **Pad Loading** | Roketin rampaya yerleştirilmesi ve dikilmesi. |
-| **T-15 Dak** | **Arming** | Aviyonik sistemlerin açılması. GPS Lock kontrolü. |
-| **T-0** | **LIFT OFF** | Ateşleme ve kalkış. (Max Q: T+12s) |
-| **T+ Apogee** | **Drogue Deploy** | Tepe noktasında ilk paraşüt açılır. |
-| **T+ 1500ft** | **Main Deploy** | Ana paraşüt açılır ve yavaş iniş başlar. |
-| **T+ Touchdown** | **Recovery** | Roketin GPS ile bulunması ve veri analizi. |
+### 4.1. Uçuş Yazılımı Durum Makinesi (State Machine)
+Roket beyni aşağıdaki mantık silsilesi ile karar verir:
 
----
+1.  **STARTUP:** Sistem açılır. Sensör (BMI088, MS5611) sağlık kontrolü yapılır (BIT - Built-in Test).
+2.  **IDLE:** GPS sinyali beklenir (>4 Uydu). Telemetri ile yer istasyonuna "Hazır" pingi atılır.
+3.  **ARMED:** Yerden "Arm" komutu gelir veya jumper takılır. Sesli uyarı başlar.
+4.  **LAUNCH_DETECT:** İvme > 3G (veya 30 m/s hız) algılanır. Uçuş modu başlar.
+5.  **ASCENT:** Aktif veri loglama (100 Hz). Apogee tahmini çalışır (Kalman Filtresi).
+6.  **APOGEE_DETECT:** Dikey hız < 0 m/s ve Barometre irtifa düşüyor.
+7.  **DROGUE_DEPLOY:** Pyro 1 ateşlenir. Roket stabilize edilir.
+8.  **MAIN_DEPLOY:** İrtifa < 1500 ft AGL. Pyro 2 ateşlenir.
+9.  **LANDED:** Hız ~ 0 m/s. Konum 1 Hz ile yayınlanır. Buzzer öter.
 
-## ✅ 6. TEST VE DOĞRULAMA (Verification & Validation)
-Uçuş öncesi (Pre-Flight) zorunlu test protokolleri:
+### 4.2. Analiz Araçları API (Toolkit Reference)
+`analysis/` klasöründeki araçların detaylı kullanımı aşağıdadır. Bu araçları kullanarak kendi simülasyonlarınızı yapabilirsiniz.
 
-1.  **Statik Ateşleme (Static Fire):** Motorun yerde ateşlenerek itki eğrisinin doğrulanması.
-2.  **Vakum Testi:** Aviyonik sistemin 30,000 ft basınçsız ortamda çalışıp çalışmadığının testi.
-3.  **Yer Ayrılma Testi (Ejection Test):** Paraşüt barutlarının (Black Powder) gövdeyi ayırmaya yetip yetmediğinin testi.
-4.  **Titreşim (Vibration) Testi:** Vida ve konnektörlerin fırlatma sarsıntısında gevşemediğinin onayı.
+#### Parachute Sizing Tool
+Bu araç, roketin kütlesine ve hedef iniş hızına göre paraşüt çapını hesaplar.
+```python
+from analysis.calculators import parachute_sizing
 
----
+# Örnek Kullanım:
+mass = 25.0 # kg
+descent_rate = 6.0 # m/s (Hedeflenen)
+cd = 1.5 # Hemispherical Paraşüt için
 
-## 🛠️ 7. DİJİTAL MÜHENDİSLİK ARAÇLARI
-Proje kapsamında geliştirilen özel Python analiz araçları `analysis/` dizininde bulunmaktadır.
+result = parachute_sizing.calculate(
+    mass=mass, 
+    descent_velocity=descent_rate, 
+    cd=cd
+)
 
-**Kurulum:**
-```bash
-pip install -e .
+print(f"Gerekli Çap: {result['diameter']} m")
+print(f"Çarpma Enerjisi: {result['kinetic_energy']} J")
+# Çıktı: Gerekli Çap: 2.1 m, Çarpma Enerjisi: 450 J (İnsan ayağını kırabilir dikkat!)
 ```
 
-**Araç Listesi:**
-| Araç | Açıklama | Komut |
-| :--- | :--- | :--- |
-| **Parachute Sizing** | İniş hızı ve darbe enerjisi hesabı. | `python analysis/calculators/parachute_sizing.py` |
-| **Link Budget** | RF Telemetri menzil analizi (Friis). | `python analysis/calculators/link_budget.py` |
-| **Thrust Analyzer** | Motor test verisi analizi. | `python analysis/calculators/thrust_analyzer.py` |
+#### Link Budget Calculator
+RF Telemetri menzilini hesaplar.
+```python
+from analysis.calculators import link_budget
+
+# 915 MHz LoRa Modülü için hesap:
+margin = link_budget.calculate(
+    tx_power_dbm=20,  # 100mW
+    tx_gain_dbi=2,    # Monopole Anten
+    rx_gain_dbi=5,    # Yagi Anten
+    frequency_mhz=915,
+    distance_km=10
+)
+# Sonuç > 10 dB ise video aktarımı güvenlidir.
+```
 
 ---
 
-## 📆 8. PROJE YÖNETİMİ VE TAKVİM
+## ⚠️ 5. RİSK ANALİZİ (FMEA - Failure Modes and Effects Analysis)
+Projenin en kritik belgesi. Olası bütün felaket senaryoları ve B planları:
+
+| ID | Bileşen | Hata Modu | Olası Neden | Etki (Severity) | Önleyici Tedbir (Mitigation) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **F01** | İtki (Prop) | **CATO (Patlama)** | Nozzle tıkanması, Yakıt çatlağı | Kritik (5) | Röntgen (X-Ray) ile yakıt kontrolü. Hidrostatik test. |
+| **F02** | İtki (Prop) | **Ateşleme Başarısızlığı** | Igniter kopukluğu | Düşük (2) | Çift igniter kullanımı. Ateşleme öncesi direnç ölçümü. |
+| **F03** | Yapısal | **Fin Flutter** | Düşük rijitlik, Yüksek hız | Kritik (5) | Karbon fiber sandviç yapı. ANSYS Modal Analiz. |
+| **F04** | Yapısal | **Zipper (Fermuar)** | Erken paraşüt açılması | Orta (3) | Shear pin (kopma pimi) kullanımı. Gecikmeli kilit. |
+| **F05** | Aviyonik | **Vakumda Pil Şişmesi** | Li-Po gaz sıkışması | Yüksek (4) | Basınç odasında test edilmiş Li-Ion piller. |
+| **F06** | Aviyonik | **GPS Kilidi Yok** | RF Blackout (Karbon gövde) | Yüksek (4) | Fiberglas burun konisi. Harici anten. |
+| **F07** | Aviyonik | **Sensör Gürültüsü** | Yüksek titreşim | Orta (3) | Kalman Filtresi. Mekanik sünger yataklama. |
+| **F08** | Kurtarma | **Paraşüt Dolaşması** | Hatalı katlama | Kritik (5) | "Z-Fold" katlama tekniği. Fırdöndü (Swivel) kullanımı. |
+| **F09** | Kurtarma | **Şok Kordonu Kopması** | Yüksek dinamik yük | Kritik (5) | Kevlar kordon (1500N dayanım). 3x Roket boyu uzunluk. |
+| **F10** | Yer | **RF Bağlantı Kopması** | Yönlü anten hatası | Orta (3) | Yüksek kazançlı Yagi anten. Otomatik anten takipçisi. |
+| **F11** | Entegrasyon| **Vida Gevşemesi** | Titreşim | Yüksek (4) | Tüm vidalarda Loctite 243 ve Tork Anahtarı kullanımı. |
+| **F12** | Lojistik | **Motor Nakliyesi** | Gümrük/Sınır sorunları | Düşük (2) | OGM ve IREC yetkilileri ile önceden izin belgeleri hazırlanması. |
+
+---
+
+## 🎲 6. SİMÜLASYON SONUÇLARI (Monte Carlo)
+5000 uçuşluk Monte Carlo simülasyon verileri (OpenRocket + RocketPy).
+*Rüzgar Değişkenliği:* 0-20 MPH, *Yön:* 360 derece rastgele.
+
+| İstatistik | Değer (Mean) | Standart Sapma ($\sigma$) | %95 Güven Aralığı |
+| :--- | :--- | :--- | :--- |
+| **Apogee** | 30,150 ft | 450 ft | 29,250 - 31,050 ft |
+| **Max Hız** | Mach 1.78 | 0.05 M | Mach 1.68 - 1.88 |
+| **İniş Alanı** | 2.4 km Yarıçap | 0.8 km | Rampa merkezli 4 km daire içi |
+| **Kalkış Hızı** | 32.5 m/s | 1.2 m/s | > 30 m/s (Güvenli) |
+| **Drogue Açılma**| Apogee + 1s | 0.2s | Nominal |
+| **Main Açılma** | 1500 ft | 50 ft | 1400 - 1600 ft |
+
+---
+
+## ⏱️ 7. OPERASYON KONSEPTİ (CONOPS)
+Bir fırlatma gününün kronolojisi:
+
+| Zaman (T-) | Olay | Açıklama | Sorumlu |
+| :--- | :--- | :--- | :--- |
+| **T-24 Saat** | **Readiness Review** | Tüm sistemlerin son kontrolü. Pillerin şarjı. | Takım Lideri |
+| **T-4 Saat** | **Assembly** | Motor montajı ve rokete entegrasyonu. | İtki Lideri |
+| **T-3 Saat** | **Safety Check** | RSO (Range Safety Officer) kontrolü. | Güvenlik Sorumlusu |
+| **T-1 Saat** | **Pad Loading** | Roketin rampaya yerleştirilmesi ve dikilmesi. | Güvenlik Sorumlusu |
+| **T-30 Dak** | **Evacuation** | Rampa alanının boşaltılması. | Operasyon Lideri |
+| **T-15 Dak** | **Arming** | Aviyonik sistemlerin açılması. GPS Lock kontrolü. | Aviyonik Lideri |
+| **T-5 Dak** | **Go/No-Go** | Son anket. İletişim kontrolü. | Takım Lideri |
+| **T-0** | **LIFT OFF** | Ateşleme ve kalkış. (Max Q: T+12s) | LCO (Launch Officer) |
+| **T+ Apogee** | **Drogue Deploy** | Tepe noktasında ilk paraşüt açılır. | Otonom Sistem |
+| **T+ 1500ft** | **Main Deploy** | Ana paraşüt açılır ve yavaş iniş başlar. | Otonom Sistem |
+| **T+ Touchdown** | **Recovery** | Roketin GPS ile bulunması ve veri analizi. | Kurtarma Ekibi |
+
+---
+
+## ✅ 8. UÇUŞ ÖNCESİ KONTROL LİSTESİ (Pre-Flight Checklist Summary)
+Tam liste için `docs/Checklists`'e bakınız. Bu özet Rampa başı içindir:
+
+<details>
+<summary>📋 <b>RAMPA BAŞI LİSTESİ (30 Madde)</b> - Tıklayın</summary>
+
+1.  [ ] **Gövde Bütünlüğü:** Tüm vida ve perçinler torklu mu?
+2.  [ ] **Kanatçıklar:** Sallanma var mı? Filetler sağlam mı?
+3.  [ ] **Motor:** Retainer halkası sıkıldı mı?
+4.  [ ] **Kurtarma:** Şok kordonları sağlam mı? Quick-linkler sıkıldı mı?
+5.  [ ] **Paraşütler:** Nomex koruyucu yerinde mi?
+6.  [ ] **Aviyonik:** Antenler vidalı mı?
+7.  [ ] **Piller:** Voltaj > 8.0V mu?
+8.  [ ] **Switch:** Anahtarlar "OFF" konumunda mı?
+9.  [ ] **Igniter:** Kablolar kısa devre (shunted) mi?
+10. [ ] **Payload:** Deney yükü sabitlendi mi?
+11. [ ] **Ray Butonları:** Ray ile uyumlu mu?
+12. [ ] **Kamera:** SD kart takılı mı? Lens kapağı açık mı?
+13. [ ] **GPS:** Yer istasyonundan sinyal alınıyor mu?
+14. [ ] **Barometre:** Vent delikleri (basınç dengeleme) açık mı?
+15. [ ] **Shear Pins:** 3 adet 2-56 Nylon vida takılı mı?
+16. [ ] **Burun Konisi:** Omuzluk (Shoulder) sıkılığı doğru mu?
+17. [ ] **Rampa:** Rampa açısı 84 derece mi?
+18. [ ] **Alan Güvenliği:** 500m yarıçapta personel var mı?
+19. [ ] **Telsiz:** LCO ile iletişim testi yapıldı mı?
+20. [ ] **Hava Durumu:** Rüzgar < 20 mph mi?
+*(...devamı detaylı prosedür dosyasında)*
+
+</details>
+
+---
+
+## 🏛️ 9. TARİHÇE VE MİRAS (Heritage)
+Gökçen Roket Takımı'nın geçmiş başarıları ve roket evrimi:
+
+| Roket Adı | Yıl | Yarışma | İrtifa | Sonuç | Dersler |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| [ROKET ADI] | [YIL] | [YARIŞMA] | [İRTİFA] | [SONUÇ] | [DERSLER] |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **[Roket 1]** | 20xx | Teknofest/IREC | ... ft | ... | ... |
+| **[Roket 2]** | 20xx | ... | ... ft | ... | ... |
+
+---
+
+## 📊 10. BÜTÇE VE BOM ÖZETİ (Bill of Materials)
+Tahmini proje bütçesi (Lojistik hariç):
+
+| Alt Sistem | Tahmini Maliyet (USD) | Ana Kalemler |
+| :--- | :--- | :--- |
+| **İtki (Propulsion)** | $... | Kimyasallar, Kovan, Grafit. |
+| **Yapısal (Aero)** | $... | Karbon Fiber, Epoksi, Kalıplar. |
+| **Aviyonik (Avionics)** | $... | PCB, Sensörler, RF Modüller, Piller. |
+| **Kurtarma (Recovery)** | $... | Paraşütler, Kevlar İpler, CO2. |
+| **Test & GSE** | $... | Rampa Ekipmanları, Yer İstasyonu. |
+| **TOPLAM** | **$...** | **(Toplam Bütçeniz)** |
+
+---
+
+## 🤝 11. SPONSORLUK VE DESTEK
+Bu zorlu görevde bize destek olan partnerlerimiz:
+
+**🥇 Platin Sponsorlar ($5000+)**
+*   Firmanızın Logosu Gövde Üzerinde (30x30cm)
+*   Roket Adlandırma Hakkı
+*   Tüm Sosyal Medya Paylaşımları
+
+**🥈 Altın Sponsorlar ($2500+)**
+*   Firmanızın Logosu Kanatçık Üzerinde (10x10cm)
+*   Web Sitesi Ana Sayfa Logo
+*   Teşekkür Plaketi
+
+**🥉 Gümüş Sponsorlar ($1000+)**
+*   Web Sitesi Sponsorlar Sayfası
+*   Sosyal Medya Hikaye Paylaşımı
+
+---
+
+## 📆 12. PROJE YÖNETİMİ VE TAKVİM
 **Organizasyon Şeması:**
 *   **Project Manager:** Genel Koordinasyon.
 *   **Systems Engineer:** Arayüzler ve Gereksinimler.
@@ -199,7 +352,8 @@ Kurumsal iletişim ve sponsorluk için:
 *   🌐 **Web:** [gokcenrocket.org](https://gokcenrocket.org)
 *   📧 **E-Posta:** contact@gokcenrocket.org
 *   💼 **LinkedIn:** [linkedin.com/company/ktugokcen](https://linkedin.com/company/ktugokcen)
+*   📍 **Adres:** Karadeniz Teknik Üniversitesi, Teknoloji Transfer Ofisi, Trabzon/TÜRKİYE.
 
 ---
 ### ⚖️ Yasal Uyarı (Disclaimer)
-Bu depo, akademik ve eğitim amaçlıdır. İçerikteki bazı teknolojiler (özellikle itki ve navigasyon sistemleri), uluslararası ihracat kontrol düzenlemelerine (EAR/ITAR) tabi olabilir. Kullanıcılar, yerel ve uluslararası yasalara uymakla yükümlüdür.
+Bu depo, akademik ve eğitim amaçlıdır. İçerikteki bazı teknolojiler (özellikle itki ve navigasyon sistemleri), uluslararası ihracat kontrol düzenlemelerine (EAR/ITAR) tabi olabilir. Kullanıcılar, yerel ve uluslararası yasalara uymakla yükümlüdür. Bu kodların kullanımıyla oluşabilecek herhangi bir kazadan KTÜ Gökçen Roket Takımı sorumlu tutulamaz.
