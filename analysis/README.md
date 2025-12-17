@@ -22,6 +22,10 @@ python example_sim.py
 ```
 
 ## 📂 Klasör Yapısı
+*   `calculators/`: Mühendislik hesap araçları.
+    *   `parachute_sizing.py`: İniş hızı ve paraşüt çapı hesabı.
+    *   `link_budget.py`: RF Telemetri menzil ve marjin analizi.
+    *   `thrust_analyzer.py`: Motor itki eğrisi analizi ve Total Impulse hesabı.
 *   `data/`: Motor itki verileri (.eng) ve aerodinamik katsayılar (.csv).
 *   `notebooks/`: Detaylı analizler için Jupyter Notebook'lar.
 *   `results/`: Simülasyon çıktıları ve grafikler.
