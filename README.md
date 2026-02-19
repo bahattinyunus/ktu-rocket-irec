@@ -1,13 +1,20 @@
-# 🚀 KTU GÖKÇEN: PROXIMA MISSION REPOSITORY
+# 🚀 PROXIMA MISSION: PERSONAL ARCHIVE
+> **⚠️ PROJECT STATUS: CANCELLED / PERSONAL ARCHIVE**
+>
+> **TR:** Bu proje ("KTÜ Gökçen: Proxima Mission") resmi olarak **İPTAL EDİLMİŞTİR**.
+> Bu depo artık geliştiricinin (@bahattinyunus) **şahsi projesi ve teknik arşivi** olarak hizmet vermektedir. Takım veya kurum (KTÜ Gökçen) ile resmi bir bağı kalmamıştır. Aşağıdaki içerik, projenin iptal edilmeden önceki teknik durumunu yansıtmaktadır.
+>
+> **EN:** This project ("KTU Gokcen: Proxima Mission") has been officially **CANCELLED**.
+> This repository now serves as the **personal project and technical archive** of the developer (@bahattinyunus). It is no longer affiliated with any team or institution. The content below reflects the technical state of the project prior to cancellation.
 
 ![Banner](docs/assets/banner.png)
 
 > **"Mükemmellik bir eylem değil, bir alışkanlıktır." - Aristoteles**
-> Bu depo, KTÜ Gökçen Roket Takımı'nın Spaceport America Cup (IREC) 30k SRAD kategorisi için geliştirdiği "Proxima" roketinin teknik dokümantasyonunu ("Technical Data Package"), mühendislik analizlerini ve operasyonel prosedürlerini içerir.
+> Bu depo, Spaceport America Cup (IREC) 30k SRAD kategorisi için geliştirilen "Proxima" roketinin teknik dokümantasyonunu ("Technical Data Package"), mühendislik analizlerini ve operasyonel prosedürlerini içerir.
 
 <div align="center">
 
-![Badge](https://img.shields.io/badge/MISSION-PROXIMA-red?style=for-the-badge) ![Badge](https://img.shields.io/badge/STATUS-FLIGHT_READY-success?style=for-the-badge) ![Badge](https://img.shields.io/badge/CATEGORY-30k_SRAD-blue?style=for-the-badge) ![Badge](https://img.shields.io/badge/DOCS-LEVEL_5-orange?style=for-the-badge)
+![Badge](https://img.shields.io/badge/MISSION-CANCELLED-red?style=for-the-badge) ![Badge](https://img.shields.io/badge/STATUS-ARCHIVED-inactive?style=for-the-badge) ![Badge](https://img.shields.io/badge/OWNERSHIP-PERSONAL-blue?style=for-the-badge)
 
 [**📜 YOL HARİTASI**](ROADMAP.md) • [**📚 KAYNAKLAR**](docs/RESOURCES.md) • [**📖 SÖZLÜK**](docs/GLOSSARY.md) • [**🧪 MALZEME**](docs/04_Subsystems_&_Payload/03_Aerostructures/Material_Properties.md) • [**📋 PROSEDÜRLER**](docs/03_Safety_&_SRAD/Checklists/)
 
@@ -20,7 +27,7 @@ Bu repo, binlerce satır kod ve teknik dokümandan oluşur. Aradığınızı bul
 
 | Belge | Fragman (İçerik Özeti) | Erişim |
 | :--- | :--- | :--- |
-| **📜 YOL HARİTASI** | Projenin 2 yıllık stratejik "Master Planı". Hangi aşamadayız, sırada ne var? | [👉 Detaylar](ROADMAP.md) |
+| **📜 YOL HARİTASI** | Projenin 2 yıllık stratejik "Master Planı". (Arşiv) | [👉 Detaylar](ROADMAP.md) |
 | **📚 KAYNAKLAR** | "Nasıl Kazanılır?" IREC şampiyonlarının raporları, kritik kitaplar ve eğitim videoları. | [👉 Kütüphaneye Git](docs/RESOURCES.md) |
 | **📖 SÖZLÜK** | CATO, Apogee, SRAD ne demek? Roketçilik terminolojisine hakim olun. | [👉 Öğren](docs/GLOSSARY.md) |
 | **🧪 MALZEME VERİSİ** | Analizler için gerekli gerçek "Engineering Data". (Alüminyum 6061, Karbon Fiber vb.) | [👉 Verileri Al](docs/04_Subsystems_&_Payload/03_Aerostructures/Material_Properties.md) |
@@ -30,8 +37,8 @@ Bu repo, binlerce satır kod ve teknik dokümandan oluşur. Aradığınızı bul
 ---
 
 ## 📋 1. MİSYON PROFİLİ (Mission Profile)
-**Proje Adı:** Proxima
-**Yarışma:** Spaceport America Cup (IREC) - 30k SRAD
+**Proje Adı:** Proxima (Şahsi Arşiv)
+**Yarışma:** Spaceport America Cup (IREC) - 30k SRAD (İptal)
 **Konum:** Spaceport America, New Mexico, ABD
 **Hedef:** 4 kg (8.8 lb) bilimsel faydalı yükü tam 30,000 ft (9,144m) irtifaya çıkarmak ve güvenli bir şekilde kurtarmak.
 
@@ -50,7 +57,7 @@ Bu repo, binlerce satır kod ve teknik dokümandan oluşur. Aradığınızı bul
 ---
 
 ## 📐 2. MATEMATİKSEL TEMELLER (Mathematical Foundation)
-Tasarımımız "deneme-yanılma" değil, aşağıdaki fizik yasaları üzerine kuruludur.
+Tasarım "deneme-yanılma" değil, aşağıdaki fizik yasaları üzerine kuruludur.
 
 ### 2.1. İtki Denklemi (Propulsion)
 Roketin itkisi ($F$), momentum değişimi ve basınç farkından doğar:
@@ -112,7 +119,7 @@ Sistem, gerçek zamanlı (RTOS) çalışan yedekli bir mimariye sahiptir.
 | **J9 (Switch)** | 1 | ARM_SW | Screw Switch | 18 AWG | Mavi |
 
 ### 🔥 B. İtki Sistemi (Propulsion)
-Motorumuz %100 SRAD (Öğrenci Tasarımı) ve M-Sınıfı bir katı yakıtlı motordur.
+Motor, %100 SRAD (Öğrenci Tasarımı) ve M-Sınıfı bir katı yakıtlı motordur.
 
 | Parametre | Değer | Detaylar |
 | :--- | :--- | :--- |
@@ -287,73 +294,14 @@ Tam liste için `docs/Checklists`'e bakınız. Bu özet Rampa başı içindir:
 ---
 
 ## 🏛️ 9. TARİHÇE VE MİRAS (Heritage)
-Gökçen Roket Takımı'nın geçmiş başarıları ve roket evrimi:
-
-| Roket Adı | Yıl | Yarışma | İrtifa | Sonuç | Dersler |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| [ROKET ADI] | [YIL] | [YARIŞMA] | [İRTİFA] | [SONUÇ] | [DERSLER] |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **[Roket 1]** | 20xx | Teknofest/IREC | ... ft | ... | ... |
-| **[Roket 2]** | 20xx | ... | ... ft | ... | ... |
-
----
-
-## 📊 10. BÜTÇE VE BOM ÖZETİ (Bill of Materials)
-Tahmini proje bütçesi (Lojistik hariç):
-
-| Alt Sistem | Tahmini Maliyet (USD) | Ana Kalemler |
-| :--- | :--- | :--- |
-| **İtki (Propulsion)** | $... | Kimyasallar, Kovan, Grafit. |
-| **Yapısal (Aero)** | $... | Karbon Fiber, Epoksi, Kalıplar. |
-| **Aviyonik (Avionics)** | $... | PCB, Sensörler, RF Modüller, Piller. |
-| **Kurtarma (Recovery)** | $... | Paraşütler, Kevlar İpler, CO2. |
-| **Test & GSE** | $... | Rampa Ekipmanları, Yer İstasyonu. |
-| **TOPLAM** | **$...** | **(Toplam Bütçeniz)** |
-
----
-
-## 🤝 11. SPONSORLUK VE DESTEK
-Bu zorlu görevde bize destek olan partnerlerimiz:
-
-**🥇 Platin Sponsorlar ($5000+)**
-*   Firmanızın Logosu Gövde Üzerinde (30x30cm)
-*   Roket Adlandırma Hakkı
-*   Tüm Sosyal Medya Paylaşımları
-
-**🥈 Altın Sponsorlar ($2500+)**
-*   Firmanızın Logosu Kanatçık Üzerinde (10x10cm)
-*   Web Sitesi Ana Sayfa Logo
-*   Teşekkür Plaketi
-
-**🥉 Gümüş Sponsorlar ($1000+)**
-*   Web Sitesi Sponsorlar Sayfası
-*   Sosyal Medya Hikaye Paylaşımı
-
----
-
-## 📆 12. PROJE YÖNETİMİ VE TAKVİM
-**Organizasyon Şeması:**
-*   **Project Manager:** Genel Koordinasyon.
-*   **Systems Engineer:** Arayüzler ve Gereksinimler.
-*   **Subsystem Leads:** Avionics, Propulsion, Aerostructures, Payload, Recovery.
-
-**Genel Takvim:**
-*   **Eylül - Kasım:** Kavramsal Tasarım (MDR)
-*   **Aralık - Ocak:** Ön Tasarım (PDR)
-*   **Şubat - Mart:** Kritik Tasarım (CDR) ve Prototip
-*   **Nisan:** Üretim ve Yer Testleri
-*   **Mayıs:** Sistem Entegrasyonu ve FRR (Flight Readiness Review)
-*   **Haziran:** **IREC Competition (Launch)**
+Bu proje, geliştiricisinin önceki çalışmalarına ve birikimine dayanmaktadır.
 
 ---
 
 ## 📞 İLETİŞİM
-Kurumsal iletişim ve sponsorluk için:
-*   🌐 **Web:** [gokcenrocket.org](https://gokcenrocket.org)
-*   📧 **E-Posta:** contact@gokcenrocket.org
-*   💼 **LinkedIn:** [linkedin.com/company/ktugokcen](https://linkedin.com/company/ktugokcen)
-*   📍 **Adres:** Karadeniz Teknik Üniversitesi, Teknoloji Transfer Ofisi, Trabzon/TÜRKİYE.
+Bu bir **kişisel arşiv** projesidir. Geliştirici ile iletişime geçmek için GitHub profilini kullanabilirsiniz.
+- **Developer:** [@bahattinyunus](https://github.com/bahattinyunus)
 
 ---
 ### ⚖️ Yasal Uyarı (Disclaimer)
-Bu depo, akademik ve eğitim amaçlıdır. İçerikteki bazı teknolojiler (özellikle itki ve navigasyon sistemleri), uluslararası ihracat kontrol düzenlemelerine (EAR/ITAR) tabi olabilir. Kullanıcılar, yerel ve uluslararası yasalara uymakla yükümlüdür. Bu kodların kullanımıyla oluşabilecek herhangi bir kazadan KTÜ Gökçen Roket Takımı sorumlu tutulamaz.
+Bu depo, akademik ve eğitim amaçlı bir **şahsi arşivdir**. İçerikteki bazı teknolojiler (özellikle itki ve navigasyon sistemleri), uluslararası ihracat kontrol düzenlemelerine (EAR/ITAR) tabi olabilir. Kullanıcılar, yerel ve uluslararası yasalara uymakla yükümlüdür. Bu kodların kullanımıyla oluşabilecek herhangi bir kazadan geliştirici sorumlu tutulamaz.
