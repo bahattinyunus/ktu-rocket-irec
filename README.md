@@ -1,5 +1,7 @@
 # 🚀 TULPAR: HIGH-ALTITUDE SOUNDING ROCKET
 
+![Banner](docs/assets/tulpar_banner.svg)
+
 > **"Mükemmellik bir eylem değil, bir alışkanlıktır." - Aristoteles**
 > Bu depo, 30.000 ft irtifayı hedefleyen ve tamamen özgün mühendislik disiplinleriyle geliştirilen "TULPAR" roketinin teknik dokümantasyonunu, analizlerini ve AR-GE süreçlerini içerir.
 
