@@ -1,13 +1,12 @@
 # 🚀 PROXIMA MISSION: PERSONAL ARCHIVE
 > **⚠️ PROJECT STATUS: CANCELLED / PERSONAL ARCHIVE**
 >
-> **TR:** Bu proje ("KTÜ Gökçen: Proxima Mission") resmi olarak **İPTAL EDİLMİŞTİR**.
-> Bu depo artık geliştiricinin (@bahattinyunus) **şahsi projesi ve teknik arşivi** olarak hizmet vermektedir. Takım veya kurum (KTÜ Gökçen) ile resmi bir bağı kalmamıştır. Aşağıdaki içerik, projenin iptal edilmeden önceki teknik durumunu yansıtmaktadır.
+> **TR:** Bu proje ("Proxima Misyonu") resmi olarak **İPTAL EDİLMİŞTİR**.
+> Bu depo artık geliştiricinin (@bahattinyunus) **şahsi projesi ve teknik arşivi** olarak hizmet vermektedir. Herhangi bir takım veya kurum ile resmi bir bağı yoktur. Aşağıdaki içerik, projenin iptal edilmeden önceki teknik durumunu yansıtmaktadır.
 >
-> **EN:** This project ("KTU Gokcen: Proxima Mission") has been officially **CANCELLED**.
-> This repository now serves as the **personal project and technical archive** of the developer (@bahattinyunus). It is no longer affiliated with any team or institution. The content below reflects the technical state of the project prior to cancellation.
+> **EN:** This project ("Proxima Mission") has been officially **CANCELLED**.
+> This repository now serves as the **personal project and technical archive** of the developer (@bahattinyunus). It is not affiliated with any team or institution. The content below reflects the technical state of the project prior to cancellation.
 
-![Banner](docs/assets/banner.png)
 
 > **"Mükemmellik bir eylem değil, bir alışkanlıktır." - Aristoteles**
 > Bu depo, Spaceport America Cup (IREC) 30k SRAD kategorisi için geliştirilen "Proxima" roketinin teknik dokümantasyonunu ("Technical Data Package"), mühendislik analizlerini ve operasyonel prosedürlerini içerir.
